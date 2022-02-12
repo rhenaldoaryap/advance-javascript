@@ -47,6 +47,7 @@ const inputNumbersExm = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 console.log(sumExm(inputNumbersExm));
 
 // Output -> 01, 2, 3, 4, 5, 6, 7, 8, 9, 10
+// Unexpected Result
 
 // RestParameter and Spread Operator
 function sumpUp2(...numbers) {
