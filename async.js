@@ -16,6 +16,7 @@ readFile();
 // With using asynchronous code and callback function
 function anotherReadFile() {
   let fileData;
+  // this container can be omitted
 
   fs.readFile("data.txt", function (error, fileData) {
     console.log("File parsing done!");

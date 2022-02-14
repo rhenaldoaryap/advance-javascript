@@ -4,6 +4,9 @@ function greetUser(greetingPrefix, userName = "user") {
 
 greetUser("Hi", "Aldo");
 greetUser("Hello");
+// Output
+// Hi Aldo !
+// Hello user !
 
 // Without Rest Parameter
 function sumUp1(numbers) {
@@ -17,6 +20,8 @@ function sumUp1(numbers) {
 }
 
 console.log(sumUp1([1, 2, 3, 4, 5]));
+// Output
+// 15
 
 // Rest Parameter
 function sumpUp(...numbers) {
@@ -30,6 +35,8 @@ function sumpUp(...numbers) {
 }
 
 console.log(sumpUp(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+// Output
+// 55
 
 // Rest Parameter without Spread Operator
 function sumExm(...numbers) {
@@ -45,7 +52,6 @@ function sumExm(...numbers) {
 const inputNumbersExm = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 console.log(sumExm(inputNumbersExm));
-
 // Output -> 01, 2, 3, 4, 5, 6, 7, 8, 9, 10
 // Unexpected Result
 
@@ -63,3 +69,5 @@ function sumpUp2(...numbers) {
 const inputNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 console.log(sumpUp2(...inputNumbers));
+// Output
+// 55

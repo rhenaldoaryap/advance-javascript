@@ -42,4 +42,4 @@ const { title, salary } = job2;
 console.log(title, salary);
 // Output
 // Developer 50000
-// For Destructuring an object, the order is not matters not the properties is
+// For Destructuring an object, the order is not matters but the properties is
