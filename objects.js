@@ -49,5 +49,5 @@ const cook2 = new Job2("Chef", "Cibitung", 35000);
 developer2.describe();
 cook2.describe();
 // Output:
-// I'm a Developer, I work in New York, I earn 45000 dollar per year
+// I'm a Developer, I work in Jakarta, I earn 45000 dollar per year
 // I'm a Chef, I work in Cibitung, I earn 35000 dollar per year
