@@ -22,6 +22,10 @@ function anotherReadFile() {
   // this container can be omitted
 
   fileSystem.readFile("data.txt", function (error, fileData) {
+    // handling error using callback
+    // if (error) {
+    //   ...
+    // }
     console.log("File parsing done without using promise!");
     console.log(fileData.toString());
   });
@@ -41,7 +45,7 @@ function readFileAgain() {
     console.log(fileData.toString());
   });
 
-  // Example dummy data if we want to using promise to avoiding callback hell
+  // Example dummy data if we want to using promise to avoiding callback hell and handling error with catch method();
   // fs.readFile("input-data.csv")
   //   .then(function (data) {
   //     const cleanedData = cleanData(data);
@@ -56,6 +60,10 @@ function readFileAgain() {
   //     if (done) {
   //       res.render("success");
   //     }
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //     // we consoling that error to see what cause that errors occured
   //   });
 
   console.log("Hi There!");
