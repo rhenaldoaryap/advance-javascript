@@ -70,3 +70,20 @@ function readFileAgain() {
 }
 
 readFileAgain();
+
+// Using async-await
+async function moreReadFile() {
+  let fileData;
+
+  try {
+    fileData = await fs.readFile("data.txt"); // -> be mind, "datas.txt" we made error for looking how try-catch handling error
+  } catch (error) {
+    console.log(error);
+  }
+
+  console.log("File parsing done! with async-await");
+  console.log(fileData.toString());
+  console.log("Hi There!");
+}
+
+moreReadFile();
