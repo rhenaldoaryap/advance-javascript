@@ -41,6 +41,23 @@ function readFileAgain() {
     console.log(fileData.toString());
   });
 
+  // Example dummy data if we want to using promise to avoiding callback hell
+  // fs.readFile("input-data.csv")
+  //   .then(function (data) {
+  //     const cleanedData = cleanData(data);
+  //     return storedDataInDatabase(cleanedData);
+  //   })
+  //   .then(function (result) {
+  //     if (result.changeData) {
+  //       return confirmDataChange();
+  //     }
+  //   })
+  //   .then(function (done) {
+  //     if (done) {
+  //       res.render("success");
+  //     }
+  //   });
+
   console.log("Hi There!");
 }
 
