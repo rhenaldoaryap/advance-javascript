@@ -71,7 +71,7 @@ function readFileAgain() {
 
 readFileAgain();
 
-// Using async-await
+// Using async-await combination
 async function moreReadFile() {
   let fileData;
 
