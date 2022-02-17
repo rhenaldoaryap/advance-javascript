@@ -45,7 +45,7 @@ function readFileAgain() {
     console.log(fileData.toString());
   });
 
-  // Example dummy data if we want to using promise to avoiding callback hell and handling error with catch method();
+  // Example dummy if we want to using promise to avoiding callback hell and handling error with catch method();
   // fs.readFile("input-data.csv")
   //   .then(function (data) {
   //     const cleanedData = cleanData(data);
