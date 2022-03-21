@@ -48,6 +48,27 @@ const cook2 = new Job2("Chef", "Cibitung", 35000);
 
 developer2.describe();
 cook2.describe();
-// Output:
-// I'm a Developer, I work in Jakarta, I earn 45000 dollar per year
-// I'm a Chef, I work in Cibitung, I earn 35000 dollar per year
+/*Output:
+  I'm a Developer, I work in Jakarta, I earn 45000 dollar per year
+  I'm a Chef, I work in Cibitung, I earn 35000 dollar per year
+*/
+
+/*
+  Diving deeper into "new" keyword, with two steps:
+  1. Creating a function without a constructor and "new" keyword
+*/
+function student(name, roll, course) {
+  const studentObj = {};
+
+  studentObj.name = name;
+  studentObj.roll = roll;
+  studentObj.course = course;
+
+  return studentObj;
+}
+
+const student1 = student("Rhenaldo", 1011, "Javascript");
+const student2 = student("Arya", 2011, "Javascript, NodeJs");
+
+console.log(student1.name);
+console.log(student2.course);
