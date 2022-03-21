@@ -72,3 +72,19 @@ const student2 = student("Arya", 2011, "Javascript, NodeJs");
 
 console.log(student1.name);
 console.log(student2.course);
+
+/*
+  2. Create a function with a constructor and "new keyword";
+  can be converted into class decralation ES2015 using the class and constructor
+*/
+function Student(name, roll, course) {
+  this.name = name;
+  this.roll = roll;
+  this.course = course;
+}
+
+const student11 = new Student("Rhenaldo", 2121, "JavaScript");
+const student22 = new Student("Arya", 9811, ["CSS", "HTML"]);
+
+console.log(student11.name);
+console.log(student22.course);
