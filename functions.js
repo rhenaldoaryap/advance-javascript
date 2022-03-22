@@ -71,3 +71,71 @@ const inputNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 console.log(sumpUp2(...inputNumbers));
 // Output
 // 55
+
+/*
+  High Order Function method:
+  reduce, map, filter, forEach.
+  each of those method will create a new array with concret value which passed as an argument
+*/
+
+// map -> only available take ONE CALLBACK
+const names = ["Rhenaldo", "Woody", "Jackson", "Malih"];
+
+const newNameWithExcMark = names.map((name) => {
+  return `${name}!`;
+});
+
+console.log(...newNameWithExcMark);
+
+// filter -> MUST return FALSY/TRUHTY based condition on callback
+const students = [
+  {
+    name: "Rhenaldo",
+    score: 99,
+  },
+  {
+    name: "Johan",
+    score: 91,
+  },
+  {
+    name: "Ceb",
+    score: 12,
+  },
+  {
+    name: "FBZ",
+    score: 10,
+  },
+  {
+    name: "Whitemon",
+    score: 20,
+  },
+];
+
+const eligibleForScholarship = students.filter((student) => student.score > 30);
+console.log(eligibleForScholarship);
+
+// find -> Returns the value of the first element in the array where predicate is true, and undefined otherwise.
+const lowStudentScore = students.find((student) => student.score < 70);
+console.log(lowStudentScore);
+
+const scores = [1, 12, 1313, 1233, 1214, 98, 482342, 774, 99812, 2];
+const compareScore = (a, b) => {
+  return a - b;
+};
+
+const sortingScore = scores.sort(compareScore);
+console.log(...sortingScore);
+
+// ForEach (declaration iteration)
+names.forEach((name) => {
+  console.log(`My name is ${name}`);
+});
+
+// reduce
+const arrayOfNumbers = [1, 2, 3, 4];
+
+const sum = arrayOfNumbers.reduce((accumulator, currentValue) => {
+  return accumulator + currentValue;
+});
+
+console.log(sum);
