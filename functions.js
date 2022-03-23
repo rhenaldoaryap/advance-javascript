@@ -139,3 +139,25 @@ const sum = arrayOfNumbers.reduce((accumulator, currentValue) => {
 });
 
 console.log(sum);
+
+// Recursive to countdown
+const recursive = (n) => {
+  if (n < 1) {
+    return [];
+  } else {
+    const countArray = recursive(n - 1);
+    countArray.unshift(n);
+    return countArray;
+  }
+};
+
+console.log(recursive(5));
+
+// Recursive to create a range numbers
+const rangeNumbers = (startNum, endNum) => {
+  return startNum === endNum
+    ? [startNum]
+    : rangeNumbers(startNum, endNum - 1).concat(endNum);
+};
+
+console.log(rangeNumbers(1, 10));
