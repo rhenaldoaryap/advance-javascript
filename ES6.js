@@ -80,7 +80,7 @@ const HIGH_TEMPERATURES = {
 
 const { today } = HIGH_TEMPERATURES;
 
-console.log(today);
+console.log(today); // 78
 
 /*
   Assign variables from nested Objects
@@ -98,4 +98,28 @@ const {
   tomorrow: { high: highTomorrow },
 } = LOCAL_FOREST;
 
-console.log(todayLow);
+console.log(todayLow); // 75
+
+/*
+  Destructuring for Array
+  Remember, when destructuring an Array, the orders is matters
+*/
+let a = 8,
+  b = 6;
+
+[a, b] = [b, a];
+
+console.log(a, b); // 6 8
+
+/*
+  Destructuring combine with Rest Parameter to reassign array elements
+*/
+const source = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const removeFirstTwoArray = (list) => {
+  const [a, b, ...arr] = list;
+  return arr;
+};
+
+const arr = removeFirstTwoArray(source);
+console.log(...arr); // 3 4 5 6 7 8 9 10 (because we using spread operator to taking out all values from objects/array)
