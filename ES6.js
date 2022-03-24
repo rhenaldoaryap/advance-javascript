@@ -44,4 +44,20 @@ const moreParameters = (arr1, arr2) => {
 };
 
 console.log(oneParameter());
-console.log(moreParameters([1, 2], [3, 4, 5]));
+console.log(moreParameters([1, 2], [3, 4, 5])); // [1, 2, 3, 4, 5]
+
+/*
+  ES6 introduce the default value
+*/
+const increment = (number, value = 1) => number + value;
+
+console.log(increment(5)); // 6
+
+/*
+  Rest Parameter with arrow function
+*/
+const sum = (...args) => {
+  return args.reduce((a, b) => a + b, 0);
+};
+
+console.log(sum(5, 10)); // 15
