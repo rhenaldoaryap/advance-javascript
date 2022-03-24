@@ -61,3 +61,41 @@ const sum = (...args) => {
 };
 
 console.log(sum(5, 10)); // 15
+
+/*
+  Destructuring Assingment
+  For Array, the order is matters
+  But, for Object, the only matters is the key
+*/
+
+/*
+  Destructuring for Objects
+*/
+
+const HIGH_TEMPERATURES = {
+  yesterday: 77,
+  today: 78,
+  tomorrow: 79,
+};
+
+const { today } = HIGH_TEMPERATURES;
+
+console.log(today);
+
+/*
+  Assign variables from nested Objects
+*/
+const LOCAL_FOREST = {
+  yesterday: { low: 77, high: 80 },
+  today: { low: 75, high: 81 },
+  tomorrow: { low: 77, high: 79 },
+};
+
+const {
+  today: { low: todayLow },
+} = LOCAL_FOREST;
+const {
+  tomorrow: { high: highTomorrow },
+} = LOCAL_FOREST;
+
+console.log(todayLow);
