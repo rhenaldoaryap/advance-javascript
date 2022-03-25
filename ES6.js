@@ -143,7 +143,7 @@ console.log(createPerson("Rhenaldo", 23, "Male"));
 */
 
 /*
-  With shorthand for avoiding the redudant (or called syntatic sugar)
+  With shorthand for avoiding the redudant (or called synctatic sugar)
 */
 
 const createPerson = (name, age, gender) => {
