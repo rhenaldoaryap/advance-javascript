@@ -317,3 +317,67 @@ const movieName = "2014: Interstellar movie was released";
 const regexOnlyNumber = /\d/g;
 const resultOnlyNumber = movieName.match(regexOnlyNumber).length;
 console.log(resultOnlyNumber); // 4 (only looking for number / digit, 2014 consist of 4 characters)
+
+/*
+    for the opposite of number or digit only we use another syntax.
+    the syntax is:
+    \D
+    with uppercase D
+*/
+
+const notOnlyNumber = /\D/g;
+const resultNotOnlyNumber = movieName.match(notOnlyNumber).length;
+console.log(resultNotOnlyNumber); // 33 (count from total characters at movieName variable)
+
+/*
+    character class for search the whitespace, return, tab, form feed, and newline
+    that syntax is:
+    \s
+*/
+
+const sample = "Whitespace is important in separating words.";
+const countWhitespace = /\s/g;
+const resultWhitespace = sample.match(countWhitespace).length;
+console.log(resultWhitespace);
+
+/*
+    result:
+    [ ' ', ' ', ' ', ' ', ' ' ]
+    OR
+    5 (if we using .length built-in function)
+*/
+
+/*
+    The opposite for NOT looking the whitespace is:
+    /\S/
+    with s uppercase
+*/
+const notCountWhitespace = /\S/g;
+const resultNotCountWhitespace = sample.match(notCountWhitespace);
+console.log(resultNotCountWhitespace);
+
+/*
+    result:
+    [
+    'W', 'h', 'i', 't', 'e', 's', 'p',
+    'a', 'c', 'e', 'i', 's', 'i', 'm',
+    'p', 'o', 'r', 't', 'a', 'n', 't',
+    'i', 'n', 's', 'e', 'p', 'a', 'r',
+    'a', 't', 'i', 'n', 'g', 'w', 'o',
+    'r', 'd', 's', '.'
+    ]
+    OR
+    39 (if we using .lenght built-in function)
+*/
+
+/*
+    How if you want to specify your pattern like lower and upper of patterns?
+    You can do that by use patterns called quantity specifiers.
+    Quantity specifiers are used with curly brackets {}.
+    You put two numbers between the curly-brackets - for the lower and upper number of patterns.
+*/
+
+const A4 = "aaaah";
+const A2 = "aah";
+const multipleA = /a{3,5}h/;
+console.log(multipleA.test(A4), multipleA.test(A2)); // true false;
