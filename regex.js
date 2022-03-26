@@ -198,6 +198,8 @@ console.log(resultWord);
     To create a negated character set, you place a CARET character (^) after the opening bracket
     and before all the characters you DO NOT WANT TO MATCH.
 
+    CARET character also used for searching at the beginning of strings.
+
     NOTE: characters are like ., !, [, @, / and WHITE SPACE are matched
     the negated character set only work according to the pattern we setting it up.
 */
@@ -215,3 +217,103 @@ console.log(resultSimple);
     'r', '.'
     ]
 */
+
+/*
+    If CARET character used for search at the beginning of strings,
+    how we can search at THE END of the string?
+
+    For search at THE END of string we can use $ (dollar) sign in Regular Expression
+*/
+const caboose = "The last car on a train is the caboose";
+const regexCaboose = /caboose$/;
+const wrongEndCaboose = /ending$/;
+const resultCaboose = regexCaboose.test(caboose); // true
+const anotherResultCaboose = wrongEndCaboose.test(caboose); // false
+
+console.log(resultCaboose, anotherResultCaboose);
+
+/*
+    result:
+    true false
+*/
+
+/*
+    There are an option to search a character that occur one or more times.
+    What does that mean?
+    For example, you have a character that contain word "Mississipi"
+    and you want to an output a character that occur one or more times.
+    To be able doing that, we could use another syntax in Regular Expression
+    that syntax is + (plus) sign
+*/
+
+const misspellingWord = "Mississipi";
+const regexSpelling = /s+/g;
+const resultSpelling = misspellingWord.match(regexSpelling);
+console.log(resultSpelling);
+
+/*
+    result:
+    [ 'ss', 'ss' ]
+*/
+
+/*
+    Also we have an option to matches characters that occur zero or more times.
+    To be able doing that, we can use another sytax, that syntax is * (asteriks) sign
+*/
+
+const asteriksRegex = /si*/g;
+const resultAsteriks = misspellingWord.match(asteriksRegex);
+console.log(resultAsteriks);
+
+/*
+    result:
+    [ 's', 'si', 's', 'si' ]
+*/
+
+/*
+    Matching all numbers and characters using longhand and shorthand.
+
+    As you learn, you could find all of characters using square bracket
+    and fill in with the character you want to search. e.g /[a-z]/.
+
+    So, if you want to find all of characters that maybe contain a number
+    or even a uppercase character and event the underscore (_).
+    Probably you will write the regex like this:
+    /[A-Za-z0-9_]/
+
+    Fortunately, there is a shorthand for writing all of those Regular Expression
+    and that is equal for that longhand find characters using Regex.
+    that shorthand is:
+    \w
+*/
+
+const anotherQuote = "Change is the end result of all true learning";
+const regexQuote = /\w/g;
+const resultQuote = anotherQuote.match(regexQuote).length;
+console.log(resultQuote); // 37 (total characters inside of anotherQuote variable)
+
+/*
+    Is there an opposite of those pattern?
+    Absolutely.
+    The opposite of those pattern is
+    \W (with the capital letter)
+*/
+const oppositeRegexQuote = /\W/g;
+const resultOpposite = anotherQuote.match(oppositeRegexQuote).length;
+console.log(resultOpposite); // 8 (count from non-alphanumeric)
+
+/*
+    non-alphanumeric is like !@#$%^&*() and so on
+*/
+
+/*
+    There are another shorthand for looking only FOR NUMBER or DIGIT
+    the syntax is:
+    \d
+    with lowercase d
+*/
+
+const movieName = "2014: Interstellar movie was released";
+const regexOnlyNumber = /\d/g;
+const resultOnlyNumber = movieName.match(regexOnlyNumber).length;
+console.log(resultOnlyNumber); // 4 (only looking for number / digit, 2014 consist of 4 characters)
