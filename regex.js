@@ -131,3 +131,87 @@ const quoteSample = "Once you stop learning you start dying";
 const vowelRegex = /[aiueo]/gi;
 const resultVowel = quoteSample.match(vowelRegex);
 console.log(resultVowel);
+
+/*
+    result:
+    [
+    'O', 'e', 'o', 'u',
+    'o', 'e', 'a', 'i',
+    'o', 'u', 'a', 'i'
+    ]
+*/
+
+/*
+    It can be cumbersome to write all of the characters that we want to match
+    we have to write it one-by-one from a to z, like this abcdefghijklmn.. and so on.
+    Fortunately, there is a build in function that can help us to avoid write all of those characters.
+    Still use character set but with a bit differ, see the code:
+*/
+
+const quoteLearning = "Learn, unlearn and relearn";
+const findAllCharacters = /[a-z]/gi;
+const resultAllCharacters = quoteLearning.match(findAllCharacters);
+console.log(resultAllCharacters);
+
+/*
+    result:
+    [
+    'L', 'e', 'a', 'r', 'n',
+    'u', 'n', 'l', 'e', 'a',
+    'r', 'n', 'a', 'n', 'd',
+    'r', 'e', 'l', 'e', 'a',
+    'r', 'n'
+    ]
+*/
+
+/*
+    Using hypen (-) to match a range of characters is not limited to letters.
+    It also works to match a range of numbers.
+
+    For example, /[0-5]/ matches any number between 0 until 5, including the 0 and 5.
+*/
+
+const words = "Indonesia independent in 1945 and was colonized for 350 years";
+const wordsRegex = /[h-s0-3]/gi;
+const resultWord = words.match(wordsRegex);
+console.log(resultWord);
+
+/*
+    result:
+    [
+    'I', 'n', 'o', 'n', 's', 'i',
+    'i', 'n', 'p', 'n', 'n', 'i',
+    'n', '1', 'n', 's', 'o', 'l',
+    'o', 'n', 'i', 'o', 'r', '3',
+    '0', 'r', 's'
+    ]
+*/
+
+/*
+    Thus far, we only learn about how to matching all the characters,
+    but never learning about how we NOT match the characters.
+
+    Now, we will learn it.
+    To NOT to match the characters we want, we using another character sets,
+    and it is called "negated character sets".
+
+    To create a negated character set, you place a CARET character (^) after the opening bracket
+    and before all the characters you DO NOT WANT TO MATCH.
+
+    NOTE: characters are like ., !, [, @, / and WHITE SPACE are matched
+    the negated character set only work according to the pattern we setting it up.
+*/
+const simpleWord = "There are 3 mice in the yard.";
+const regexPattern = /[^a-o]/gi; // not matches all characters from a until o with ignore case sensitive and not only find first macthes word
+const resultSimple = simpleWord.match(regexPattern);
+console.log(resultSimple);
+
+/*
+    result:
+    [
+    'T', 'r', ' ', 'r',
+    ' ', '3', ' ', ' ',
+    ' ', 't', ' ', 'y',
+    'r', '.'
+    ]
+*/
