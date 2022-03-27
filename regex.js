@@ -381,3 +381,152 @@ const A4 = "aaaah";
 const A2 = "aah";
 const multipleA = /a{3,5}h/;
 console.log(multipleA.test(A4), multipleA.test(A2)); // true false;
+
+const ohStr = "Ohhh no";
+const ohRegex = /Oh{3,6}\sno/i;
+console.log(ohRegex.test(ohStr)); // true
+
+/*
+    Only looking for "Ohhh no" word when it has 3 to 6 letter h's.
+    What you count is the "h" word not the "Oh" word inside of a pattern regex we declared.
+
+    We use the s-flag to include the whitespace and no word to be included in our regex,
+    and end it with i-flag to ignore the case sensitive.
+*/
+
+/*
+    Specify only the lower and upper number of matches
+
+    This can very helpful like at implementationRegex.js file
+    while we declare some rules for username.
+    We only pass the username if the username has at least two characters as a username
+    unless than that we will throw an error.
+*/
+
+const haStr = "Hazzzzah";
+const haRegex = /Haz{4,}ah/i;
+console.log(haRegex.test(haStr)); // true
+
+/*
+    Explanation:
+    We only looking if the word "Hazzzzah" has a 4 (four) "z" letter and ended with "ah" word or not.
+    Code above will return true because we have four z letter and ended with ah word.
+
+    So, if we read that code, that will be:
+    "Regex, please find me a pattern whether Hazzzzah word has four z letter and ended with ah or not"
+*/
+
+/*
+    We can also specify the exact number of matches.
+
+    Still use the quantity specifiers or {} to find the specify the exact number,
+    but the different is we don't have to write the second number after the comma,
+    if we do that, we are specifying the lower and number of matches.
+*/
+
+const rheStr = "Rhhhenaldo";
+const rheRegex = /Rh{3}e/i;
+console.log(rheRegex.test(rheStr)); //true
+
+/*
+    Explanation about specifying the quantity specifiers to looking the lower and upper numbers
+    or to looking the exact number of matches.
+
+    After we define how many number we want to look, you have to know the exact next word after
+    the define number, not the ended of the word.
+
+    For instance code above:
+    our regex is /Rh{3}e/i -> this will return true because we have 3 times h word.
+
+    Or you could write like below and still return true:
+    /Rh{3}enaldo/i
+*/
+
+/*
+    Check for All or none.
+
+    Sometimes the patterns you want to search for may have parts of it that may or may nor exist.
+    However, it may be important to check for them nonetheless.
+
+    We can use the ? (question mark) to like say "the previous word is optional"
+*/
+
+const favWord = "favorite";
+const favRegex = /favou?rite/i;
+console.log(favRegex.test(favWord)); // true
+
+const colWord = "color";
+const colRegex = /colou?r/i;
+console.log(colRegex.test(colWord)); // true
+
+/*
+    Lookahead.
+
+    What is lookahead?
+    Lookaheads are pattern that tell JavaScript to look-ahead in our string
+    to check for patterns further along.
+    This can be useful when you want to search for multiple patterns over the same string.
+
+    There are two type of lookaheads:
+    1. Positive lookahead
+    2. Negative lookahead
+
+    Positive lookahead will look to make sure the element in search pattern IS THERE
+    BUT WON'T ACTUALLY MATCH IT.
+    A positive lookahead is used as (?=...) where the ... is the required part that is not matched.
+
+    Negative lookahead will look to make sure the element in the search pattern IS NOT THERE.
+    A negative lookahead is used as (?!...) where the ... is the pattern that you do not want to be there.
+    The rest of the pattern is returned if the negative lookahead part is not present.
+*/
+
+const naivelyPass = "abc123";
+const naiveRegex = /(?=\w{3,6})(?=\D*\d)/;
+console.log(naiveRegex.test(naivelyPass));
+
+/*
+    Explanation:
+    check the password whether have 3 to 6 characters and at lease one number.
+
+    ?= - positive lookahead to make sure the element in search pattern is THERE BUT WON'T ACTUALLY MATCH IT.
+    \w{3,6} - shorthand for [A-Za-z0-9_] and check whether has 3 to 6 characters in it
+    \D* - the opposite for NOT looking only digit or numbers and search one or more times the characters appears.
+    \d - only looking for digit or number inside of the character.
+
+*/
+
+/*
+    Check the password that are greater than 5 characters long, and have two consecutive digits.
+*/
+const sampleWords = "astronaut";
+// const sampleRegex = /(?=\w{6})(?=\D*\d{2})/;
+// OR
+const sampleRegex = /(?=\w{6})(\w*\d{2})/;
+console.log(sampleRegex.test(sampleWords));
+
+/*
+    Explanation:
+    ?= - positive lookahead.
+    \w{6} - shorthand for [A-Za-z0-9_] and two describe more than five characters long.
+    \w* - shorthand for [A-Za-z0-9_] and look for characters that appears zero or more times.
+    \d{2} - only looking for digits or numbers only and describe whether has two consecutive digits.
+*/
+
+/*
+    Check for mixed grouping of characters.
+
+    Sometimes we want to check for groups of characters using Regular Expression and to achieve
+    that we use parantheses ().
+
+    If you find either Penguin or Pumpkin is a string, you can use the following
+    Regular Expression:
+    /P(engu|umpk)in/gi
+*/
+
+const testStr = "Pumpkin";
+const strRegex = /P(engu|umpk)in/gi;
+console.log(strRegex.test(testStr)); // true
+
+const middleName = "Eleanor Roosevelt";
+const middleRegex = /(Franklin|Eleanor).*Roosevelt/gi;
+console.log(middleRegex.test(middleName)); // true
