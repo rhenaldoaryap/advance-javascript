@@ -482,7 +482,7 @@ console.log(colRegex.test(colWord)); // true
 
 const naivelyPass = "abc123";
 const naiveRegex = /(?=\w{3,6})(?=\D*\d)/;
-console.log(naiveRegex.test(naivelyPass));
+console.log(naiveRegex.test(naivelyPass)); // true
 
 /*
     Explanation:
@@ -502,7 +502,7 @@ const sampleWords = "astronaut";
 // const sampleRegex = /(?=\w{6})(?=\D*\d{2})/;
 // OR
 const sampleRegex = /(?=\w{6})(\w*\d{2})/;
-console.log(sampleRegex.test(sampleWords));
+console.log(sampleRegex.test(sampleWords)); // false
 
 /*
     Explanation:
@@ -530,3 +530,103 @@ console.log(strRegex.test(testStr)); // true
 const middleName = "Eleanor Roosevelt";
 const middleRegex = /(Franklin|Eleanor).*Roosevelt/gi;
 console.log(middleRegex.test(middleName)); // true
+
+/*
+    Capture groups.
+
+    Let's say you want to match a word that occurs multiple times like below:
+    let repeatStr = "row row row your boat"
+
+    Of course you could use the literal pattern to match that word like
+    /row row <row /
+    but what if you don't know the specific word that repeated?
+
+    Capture groups came up to help us.
+    You could use the capture groups by use combine between parantheses
+    and shorthand for capturing all word and add with the plus (+) sign
+    to search a pattern that occur one or more times.
+
+    Just that?
+    Nope, not done yet.
+    We must store those characters that appear multiple times to "temporary variable".
+    How we can store it to "temporary variable"?
+
+    We can add substring.
+    This substring can be accessed within the same regex using
+    a backslash and number of the capture group (e.g \1).
+    Capture groups automatically numbered by the position of their opening parentheses (left to right),
+    starting at 1.
+*/
+
+const exmStr = "row row row your boat";
+const exmRegex = /(\w+) \1 \1/;
+console.log(exmRegex.test(exmStr) && exmStr.match(exmRegex));
+
+/*
+    Result:
+    true
+    [
+        'row row row',
+        'row',
+        index: 0,
+        input: 'row row row your boat',
+        groups: undefined
+    ]
+*/
+
+/*
+    Another example of capture groups.
+*/
+
+const repeatNum = "42 42 42";
+const repeatRegex = /^(\d+)\s\1\s\1$/;
+console.log(repeatNum.match(repeatRegex));
+
+/*
+    ^ - negated character (caret) to specify the character that we DO NOT WANT TO MATCH.
+    \d+ - search only for digit or numbers and include one or more times appear.
+    \s - seach for whitespace, tab, return, form feed, newline.
+    \1 - store it to a "temporary variable".
+    $ - looking for ended with a character that we define.
+*/
+
+/*
+    Use capture groups to search and replace.
+
+    Searching is useful, you can make searching even more powerful when it also changes (or replaces)
+    the text you match.
+
+    You can easily search and replace text in a string using .replace() method.
+    The input for .replace() is first the regex pattern you want search for.
+    The second parameter is the string to replace the match or a function to do something.
+
+    You can also access groups in the replacement string with dollar sign ($).
+*/
+
+const strSwab = "one two three";
+const strSwabRegex = /(\w+)\s(\w+)\s(\w+)/;
+const swabStr = "$3 $2 $1";
+console.log(strSwab.replace(strSwabRegex, swabStr)); // three two one
+
+/*
+    Explanation:
+    \w+ - search all pattern with this shorthand and fetch one or more times characters appears.
+    \s - include the whitespace, tab, form feed, return and newline.
+    $number - accessing the string and as placeholder which characters we want to replace
+*/
+
+/*
+    Another example of using capture groups swabbing the initialized string
+*/
+console.log("Code Camp".replace(/(\w+)\s(\w+)/, "$2 $1")); // Camp Code
+
+/*
+    Remove whitespace from start and end.
+
+    Sometimes whitespace characters around strings are not wanted but are there.
+    Typical processing of strings is to remove the whitespace at the start and end of it.
+*/
+
+const sayHello = "      Hello, World!       ";
+const sayRegex = /^\s+|\s+$/g;
+console.log(sayHello.replace(sayRegex, "")); // Hello, World!
