@@ -65,3 +65,74 @@ console.log(factorialize(5));
     the calculate will be
     5 * 4 * 3 * 2 * 2
 */
+
+/*
+  Return largest number in arrays
+*/
+
+const largestOfFour = (arr) => {
+  return arr.map((group) => {
+    return group.reduce((prev, current) => {
+      return current > prev ? current : prev;
+    });
+  });
+};
+
+console.log(
+  largestOfFour([
+    [4, 5, 1, 3],
+    [13, 27, 18, 26],
+    [32, 35, 37, 39],
+    [1000, 1001, 857, 1],
+  ])
+);
+
+/*
+  result:
+  [5, 27, 38, 1001]
+*/
+
+/*
+  Repeat a string repeat a string.
+  Use recursive function.
+*/
+const repeatStringNumTimes = (str, num) => {
+  return num > 0 ? str + repeatStringNumTimes(str, num - 1) : "";
+};
+
+console.log(repeatStringNumTimes("abc", 3));
+
+/*
+  result:
+  abcabc
+*/
+
+/*
+  Truncate a string
+*/
+const truncateAString = (str, num) => {
+  return str.length > num ? str.slice(0, num) + "..." : str;
+};
+
+console.log(
+  truncateAString(
+    "This string will be truncate based on the number I declare at the second argument",
+    5
+  )
+);
+
+/*
+  result:
+  This ...
+*/
+
+const titleCase = (str) => {
+  return str.toLowerCase().replace(/(^|\s)\S/g, (L) => L.toUpperCase());
+};
+
+console.log(titleCase("I am super human"));
+
+/*
+  result:
+  "I Am Super Human"
+*/
