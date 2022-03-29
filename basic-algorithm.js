@@ -136,3 +136,85 @@ console.log(titleCase("I am super human"));
   result:
   "I Am Super Human"
 */
+
+/*
+  Falsy Bouncer
+*/
+const bouncer = (arr) => {
+  return arr.filter(Boolean);
+};
+
+console.log(bouncer([1, "human", 0, false, 9]));
+
+/*
+  result:
+  [1, "human", 9]
+*/
+
+/*
+  Where do I belong?
+*/
+
+const getIndexToIns = (arr, num) => {
+  return arr
+    .concat(num)
+    .sort((a, b) => a - b)
+    .indexOf(num);
+};
+
+console.log(getIndexToIns([40, 12, 80, 44, 60], 60));
+
+/*
+  Mutations
+*/
+
+const mutation = (arr) => {
+  return arr[1]
+    .toLowerCase()
+    .split("")
+    .every((letter) => {
+      return arr[0].toLowerCase().indexOf(letter) !== -1;
+    });
+};
+
+console.log(mutation(["hello", "hey"])); // false
+
+/*
+  Explanation:
+  Grab the second string, lowercase and turn it into an array; then make sure every one of
+  its letters is a part of the lowercased first string.
+
+  Every will basically give you letter by letter to compare,
+  which we do by using indexOf on the first string.
+  indexOf will give you -1 if the current letter is missing.
+  We check that not to be the case, for if this happens even once every will be false.
+
+  For example, ["hello", "Hello"], should return true because all of the letters in
+  the second string are present in the first, ignoring case.
+
+  The arguments, ["hello", "hey"] should return false because the string "hello" does not contain a "y".
+
+  Lastly, ["Alien", "line"] should return true because all of the letters in line are present in Alien
+*/
+
+/*
+  Chunky Monkey.
+
+  Write a function that splits an array (first argument) into groups
+  the length of size (second argument) and returns them as a two-dimensional array.
+*/
+
+const chunkArrayInGroups = (arr, size) => {
+  let newArray = [];
+  while (arr.length > 0) {
+    newArray.push(arr.splice(0, size));
+  }
+  return newArray;
+};
+
+console.log(chunkArrayInGroups(["a", "b", "c", "d"], 2));
+
+/*
+  result:
+  [ [ "a", "b" ], [ "c", "d" ] ]
+*/
