@@ -161,3 +161,46 @@ const rangeNumbers = (startNum, endNum) => {
 };
 
 console.log(rangeNumbers(1, 10));
+
+/*
+  Functional Programming.
+
+  Functional programming is a style of programming where solutions are simple,
+  isolated functions, without any side effects outside of the function scope: INPUT -> PROCESS -> OUTPUT.
+
+  Functional programming is about:
+
+  Isolated functions - there is no dependence on the state of the program,
+  which includes global variables that are subject to change.
+
+  Pure functions - the same input always gives the same output.
+
+  Functions with limited side effects - any changes, or mutations,
+  to the state of the program outside the function are carefully controlled.
+ */
+
+/*
+    unconscious, client wants a different type of tea.
+    to handle that request, we must create another prepare tea.
+
+    If we want to handle that different type of tea,
+    while after looping we point the push argument to the first parameter,
+    why do that?
+    because we push the type of tea according to the client request.
+  */
+const greenTea = () => "Green Tea";
+
+const blackTea = () => "Black Tea";
+
+const getTea = (typeOfTea, numOfCups) => {
+  const cupsOfTea = [];
+
+  for (let cups = 1; cups <= numOfCups; cups += 1) {
+    cupsOfTea.push(typeOfTea());
+  }
+
+  return cupsOfTea;
+};
+
+console.log(getTea(greenTea, 10));
+console.log(getTea(blackTea, 32));
