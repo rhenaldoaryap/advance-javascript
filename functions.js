@@ -411,3 +411,33 @@ console.log(
     return item * 2;
   })
 );
+
+/*
+  explanation:
+  this here give us access to the object we are calling myMap
+
+  result:
+  [ 4, 20, 42, 24624 ]
+*/
+
+const filteredList = watchList
+  /*
+    if you want to using key:value to be more readable and be more understandable
+    .filter(({ imdbRating: rating }) => rating >= 8.0)
+    .map(({ Title: title, imdbRating: rating }) => ({ title, rating }))
+
+    those key:value will give the same result.
+  */
+  .filter(({ imdbRating }) => imdbRating >= 8.0)
+  .map(({ Title, imdbRating }) => ({ Title, imdbRating }));
+console.log(filteredList);
+
+/*
+  result:
+  [
+    { Title: 'Inception', imdbRating: '8.8' },
+    { Title: 'Interstellar', imdbRating: '8.6' },
+    { Title: 'The Dark Knight', imdbRating: '9.0' },
+    { Title: 'Batman Begins', imdbRating: '8.3' }
+  ]
+*/
