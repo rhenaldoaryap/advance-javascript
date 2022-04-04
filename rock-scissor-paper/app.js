@@ -4,6 +4,9 @@ const ROCK = "ROCK";
 const PAPER = "PAPER";
 const SCISSORS = "SCISSORS";
 const DEFAULT_USER_CHOICE = ROCK;
+const RESULT_DRAW = "DRAW";
+const RESULT_PLAYER_WINS = "PLAYER_WIN";
+const RESULT_COMPUTER_WINS = "COMPUTER WIN";
 
 let gameIsRunning = false;
 
@@ -21,7 +24,41 @@ const getPlayerChoice = () => {
   return selection;
 };
 
-startGameBtn.addEventListener("click", function () {
+const getComputerChoice = () => {
+  const randomValue = Math.random();
+
+  if (randomValue < 0.34) {
+    return ROCK;
+  } else if (randomValue < 0.67) {
+    return PAPER;
+  } else {
+    return SCISSORS;
+  }
+};
+
+const getWinner = (computerChoice, playerChoice) => {
+  return computerChoice === playerChoice
+    ? RESULT_DRAW
+    : (computerChoice === ROCK && playerChoice === PAPER) ||
+      (computerChoice === PAPER && playerChoice === SCISSORS) ||
+      (computerChoice === SCISSORS && playerChoice === ROCK)
+    ? RESULT_PLAYER_WINS
+    : RESULT_COMPUTER_WINS;
+
+  /* if (computerChoice === playerChoice) {
+    return RESULT_DRAW;
+  } else if (
+    (computerChoice === ROCK && playerChoice === PAPER) ||
+    (computerChoice === PAPER && playerChoice === SCISSORS) ||
+    (computerChoice === SCISSORS && playerChoice === ROCK)
+  ) {
+    return RESULT_PLAYER_WINS;
+  } else {
+    return RESULT_COMPUTER_WINS;
+  } */
+};
+
+startGameBtn.addEventListener("click", () => {
   if (gameIsRunning) {
     return;
   }
@@ -29,6 +66,8 @@ startGameBtn.addEventListener("click", function () {
   gameIsRunning = true;
 
   console.log("Game starting");
-  const playerSelection = getPlayerChoice();
-  console.log(playerSelection);
+  const playerChoice = getPlayerChoice();
+  const computerChoice = getComputerChoice();
+  const winner = getWinner(computerChoice, playerChoice);
+  console.log(winner);
 });
