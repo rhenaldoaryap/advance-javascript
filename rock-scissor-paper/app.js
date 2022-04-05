@@ -69,5 +69,32 @@ startGameBtn.addEventListener("click", () => {
   const playerChoice = getPlayerChoice();
   const computerChoice = getComputerChoice();
   const winner = getWinner(computerChoice, playerChoice);
-  console.log(winner);
+
+  // outputing message to user
+  let message = `You picked ${playerChoice}, computer picked ${computerChoice} and you`;
+  if (winner === RESULT_DRAW) {
+    message = `${message} had a draw`;
+  } else if (winner === RESULT_PLAYER_WINS) {
+    message = `${message} won`;
+  } else {
+    message = `${message} lost`;
+  }
+
+  alert(message);
+
+  // turn game to game over
+  gameIsRunning = false;
 });
+
+const sumUp = (...numbers) => {
+  let sum = 0;
+  for (const num of numbers) {
+    sum += num;
+  }
+
+  return sum;
+};
+
+const numbers = [1, 12, 41, -12, -442, 12314, 12];
+
+console.log(sumUp(...numbers));
