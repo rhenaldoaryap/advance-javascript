@@ -179,3 +179,163 @@ prices.forEach((price, idx, prices) => {
 });
 
 console.log(taxAdjustedPrices);
+
+const sortedPrices = prices.sort((a, b) => {
+  return a - b;
+});
+
+console.log(sortedPrices);
+
+/*
+    reverse method()
+    simply will reverse the result you got.
+*/
+
+console.log(sortedPrices.reverse());
+
+console.log(prices.filter((price) => price > 6));
+
+const totalPrice = prices.reduce((previousValue, currentValue) => {
+  return previousValue + currentValue;
+});
+
+console.log(totalPrice);
+
+/*
+    explanation:
+    reduce method will calculate between the initial value and the currentvalue.
+
+    what does that mean?
+    for example, actually, reduce method have a second argument, that second argument is the initial value
+    and the initial value of the second argument is 0 (zero).
+    and the currentValue is the first element in array.
+
+    so, the 0 will fill the previousValue container and store it there,
+    and the currentValue will be 10.99
+    if we calculate to add numbers between previousValue and currentValue that will be 0 + 10.99.
+
+    the result 10.99 will be stored as the previousValue container
+    and then the currentValue will look for the second element in the array,
+    the calculation will be 10.99 + 5.99.
+
+    it will iterate until value inside of an array ended.
+    if we use the container at line 172, the result will be
+    33.080
+*/
+
+/*
+    spread operator.
+    sperad operator will return a new array or object (copying) based on the thing you spread,
+    and then you could do whatever you want to that new array or object.
+*/
+const names = ["Rhenaldo", "Arya"];
+
+const copiedName = [...names];
+names.unshift("Mr");
+console.log(names, copiedName);
+
+/*
+    result:
+    [ "Mr", "Rhenaldo", "Arya" ] [ "Rhenaldo", "Arya" ]
+*/
+
+/*
+    Array
+    Sets
+    Maps
+
+    three type of data.
+    Array we have learn lot of about it.
+
+    Set.
+    Set is a type of data that willing to us to only have one value and
+    not allowed to have a duplicate value inside of a variable.
+    to be able using sets, we MUST USE NEW KEYWORD in front of it
+
+    sets have a match method, that method is .has()
+    .has() method only return two possibilities;
+    1. true
+    2. false
+
+    .has() method will check whether it contains something or not.
+
+    see the example:
+*/
+const ids = new Set([1, 2, 3]);
+console.log(ids.has(1)); // true
+
+for (const value of ids.entries()) {
+  console.log(value);
+  /*
+    result:
+    [ 1, 1 ]
+    [ 2, 2 ]
+    [ 3, 3 ]
+  */
+}
+
+/*
+    Map.
+    Map is a type of data that can help us to add more data inside of an object without
+    harm the old object, might be that object is being used in other part of our web
+    application and we couldn't do much more with that object.
+
+    maps have a match method, that method is .get()
+    and also we can add a value inside of an object with help of method .set()
+
+    and how we can fetch the result of that object?
+    there are three ways to taking out the result;
+    1. for .. of loop and using destructuring array to taking out key, value information
+    2. for .. of loop and only taking out the key with help of .keys() method
+    3. for .. of loop and only taking out the value with help of .values() method
+
+    see example:
+*/
+
+const person1 = { name: "Rhenaldo" };
+const person2 = { name: "Arya" };
+
+const personDataAgain = new Map([
+  [person1, [{ date: "yesterday", price: 10 }]],
+]);
+
+personDataAgain.set(person2, [{ date: "yesterday", price: 10 }]);
+
+console.log(personDataAgain);
+console.log(personDataAgain.get(person1));
+
+// using array destructuring
+for (const [key, value] of personDataAgain) {
+  console.log(key, value);
+  /*
+    result:
+    { name: 'Rhenaldo' } [ { date: 'yesterday', price: 10 } ]
+    { name: 'Arya' } [ { date: 'yesterday', price: 10 } ]
+  */
+}
+
+// only taking out the key information
+for (const key of personDataAgain.keys()) {
+  console.log(key);
+  /*
+    result:
+    { name: "Rhenaldo Arya" }
+    { name: "Arya" }
+  */
+}
+
+// only taking out the value information
+for (const value of personDataAgain.values()) {
+  console.log(value);
+  /*
+    result:
+    [ { date: 'yesterday', price: 10 } ]
+    [ { date: 'yesterday', price: 10 } ]
+  */
+}
+
+/*
+    summarize:
+    set is used for array
+    map is used for object
+*/
