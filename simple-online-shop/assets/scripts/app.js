@@ -16,11 +16,30 @@ class Product {
   }
 }
 
+class ShoppingCart {
+  items = [];
+
+  render() {
+    const cartEl = document.createElement("section");
+    cartEl.innerHTML = `
+        <h2>Total: \$${0}</h2>
+        <button>Order Now</button>
+    `;
+    cartEl.className = "cart";
+    return cartEl;
+  }
+}
+
 class ProductItem {
   /* product parameter below is expecting to be products array
-  inside of ProductList Class, see line 67 */
+  inside of ProductList Class */
   constructor(product) {
     this.product = product;
+  }
+
+  addToCart() {
+    console.log("Adding produt success");
+    console.log(this.product);
   }
 
   render() {
@@ -37,6 +56,9 @@ class ProductItem {
             </div>
         </div>
     `;
+    const addCartButton = prodEl.querySelector("button");
+    // using bind method to reffering this to the same method (addToCart()) we looking to
+    addCartButton.addEventListener("click", this.addToCart.bind(this));
     return prodEl;
   }
 }
@@ -60,7 +82,6 @@ class ProductList {
   constructor() {}
 
   render() {
-    const renderHook = document.getElementById("app");
     const prodList = document.createElement("ul");
     prodList.className = "product-list";
     /* render all products to be single product
@@ -71,9 +92,24 @@ class ProductList {
       const prodEl = productItem.render();
       prodList.append(prodEl);
     }
-    renderHook.append(prodList);
+    return prodList;
   }
 }
 
-const productList = new ProductList();
-productList.render();
+class Shop {
+  render() {
+    const renderHook = document.getElementById("app");
+
+    const cart = new ShoppingCart();
+    const cartEl = cart.render();
+
+    const productList = new ProductList();
+    const productListEl = productList.render();
+
+    renderHook.append(cartEl);
+    renderHook.append(productListEl);
+  }
+}
+
+const shop = new Shop();
+shop.render();
