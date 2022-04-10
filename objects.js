@@ -88,3 +88,18 @@ const student22 = new Student("Arya", 9811, ["CSS", "HTML"]);
 
 console.log(student11.name);
 console.log(student22.course);
+
+/*
+  THIS KEYWORD WITH METHOD (FUNCTION INSIDE OF AN OBJECT)
+
+  arrow function with "this" keyword will not bind to anything, it will always refererring
+  to the outside of the function (global windows)
+
+  very different with regular function, with regular function, this keyword will referring
+  and binding to the same object or to the same function we looking to
+
+  outside of the method, arrow function will shine and "this" keyword will referrring to
+  the object or function we looking to.
+
+  OR FOR SIMPLY FOR DETERMINING THE THIS OBJECT IS LOOK BASED ON WHAT THE THIS KEYWORD IS CALLING
+*/
