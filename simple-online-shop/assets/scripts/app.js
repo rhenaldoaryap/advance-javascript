@@ -16,7 +16,37 @@ class Product {
   }
 }
 
-class ShoppingCart {
+class ElementAttribute {
+  constructor(attrName, attrValue) {
+    this.name = attrName;
+    this.value = attrValue;
+  }
+}
+
+class Component {
+  constructor(renderHookId) {
+    this.hookId = renderHookId;
+  }
+
+  createRootElement(tag, cssClasess, attributes) {
+    const rootElement = document.createElement(tag);
+
+    if (cssClasess) {
+      rootElement.className = cssClasess;
+    }
+
+    if (attributes && attributes.length > 0) {
+      attributes.forEach((attr) =>
+        rootElement.setAttribute(attr.name, attr.value)
+      );
+    }
+
+    document.getElementById(this.hookId).append(rootElement);
+    return rootElement;
+  }
+}
+
+class ShoppingCart extends Component {
   items = [];
 
   set cartItems(value) {
@@ -34,6 +64,14 @@ class ShoppingCart {
     return sum;
   }
 
+  constructor(renderHookId) {
+    /*
+    super keyword very useful when we want to call and execute constructor
+    from parent class
+    */
+    super(renderHookId);
+  }
+
   addProduct(product) {
     const updatedItems = [...this.items];
     updatedItems.push(product);
@@ -41,22 +79,21 @@ class ShoppingCart {
   }
 
   render() {
-    const cartEl = document.createElement("section");
+    const cartEl = this.createRootElement("section", "cart");
     cartEl.innerHTML = `
         <h2>Total: \$${0}</h2>
         <button>Order Now</button>
     `;
-    cartEl.className = "cart";
     // create a new tag element with this keyword
     this.totalOutput = cartEl.querySelector("h2");
-    return cartEl;
   }
 }
 
-class ProductItem {
+class ProductItem extends Component {
   /* product parameter below is expecting to be products array
   inside of ProductList Class */
-  constructor(product) {
+  constructor(product, renderHookId) {
+    super(renderHookId);
     this.product = product;
   }
 
@@ -65,8 +102,7 @@ class ProductItem {
   }
 
   render() {
-    const prodEl = document.createElement("li");
-    prodEl.className = "product-item";
+    const prodEl = this.createRootElement("li", "product-item");
     prodEl.innerHTML = `
         <div>
             <img src="${this.product.imageUrl}" alt="${this.product.title}">
@@ -81,11 +117,10 @@ class ProductItem {
     const addCartButton = prodEl.querySelector("button");
     // using bind method to reffering this to the same method (addToCart()) we looking to
     addCartButton.addEventListener("click", this.addToCart.bind(this));
-    return prodEl;
   }
 }
 
-class ProductList {
+class ProductList extends Component {
   products = [
     new Product(
       "A Pillow",
@@ -101,39 +136,37 @@ class ProductList {
     ),
   ];
 
-  constructor() {}
+  constructor(renderHookId) {
+    super(renderHookId);
+  }
 
   render() {
-    const prodList = document.createElement("ul");
-    prodList.className = "product-list";
+    this.createRootElement("ul", "product-list", [
+      new ElementAttribute("id", "prod-list"),
+    ]);
     /* render all products to be single product
     this.products refers to the ProductList class
     and then access to the products array */
     for (const product of this.products) {
-      const productItem = new ProductItem(product);
-      const prodEl = productItem.render();
-      prodList.append(prodEl);
+      const productItem = new ProductItem(product, "prod-list");
+      productItem.render();
     }
-    return prodList;
   }
 }
 
 class Shop {
   render() {
-    const renderHook = document.getElementById("app");
+    this.cart = new ShoppingCart("app");
+    this.cart.render();
 
-    this.cart = new ShoppingCart();
-    const cartEl = this.cart.render();
-
-    const productList = new ProductList();
-    const productListEl = productList.render();
-
-    renderHook.append(cartEl);
-    renderHook.append(productListEl);
+    const productList = new ProductList("app");
+    productList.render();
   }
 }
 
 class App {
+  static cart;
+
   static init() {
     const shop = new Shop();
     shop.render();
