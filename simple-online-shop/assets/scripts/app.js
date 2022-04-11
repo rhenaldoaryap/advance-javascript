@@ -24,9 +24,14 @@ class ElementAttribute {
 }
 
 class Component {
-  constructor(renderHookId) {
+  constructor(renderHookId, shouldRender = true) {
     this.hookId = renderHookId;
+    if (shouldRender) {
+      this.render();
+    }
   }
+
+  render() {}
 
   createRootElement(tag, cssClasess, attributes) {
     const rootElement = document.createElement(tag);
@@ -69,7 +74,12 @@ class ShoppingCart extends Component {
     super keyword very useful when we want to call and execute constructor
     from parent class
     */
-    super(renderHookId);
+    super(renderHookId, false);
+    this.orderProducts = () => {
+      console.log("Purchasing..");
+      console.log(this.items);
+    };
+    this.render();
   }
 
   addProduct(product) {
@@ -84,6 +94,22 @@ class ShoppingCart extends Component {
         <h2>Total: \$${0}</h2>
         <button>Order Now</button>
     `;
+    const orderButton = cartEl.querySelector("button");
+    /*
+    another way of adding method and ensure "this" keyword using anonymous function
+    instead of .bind() to be able to referring to the same method we looking for.
+    And immedetially execute it because we are inside of the anonymous function and
+    if we not execute it immedetially who/where we can execute it?
+    no place other than immedetially execute it
+    orderButton.addEventListener("click", () => this.orderProducts());
+    */
+
+    /*
+    another way of adding method is we set up the method it self
+    see otherProducts method above
+    */
+    orderButton.addEventListener("click", this.orderProducts);
+
     // create a new tag element with this keyword
     this.totalOutput = cartEl.querySelector("h2");
   }
@@ -93,8 +119,9 @@ class ProductItem extends Component {
   /* product parameter below is expecting to be products array
   inside of ProductList Class */
   constructor(product, renderHookId) {
-    super(renderHookId);
+    super(renderHookId, false);
     this.product = product;
+    this.render();
   }
 
   addToCart() {
@@ -121,46 +148,60 @@ class ProductItem extends Component {
 }
 
 class ProductList extends Component {
-  products = [
-    new Product(
-      "A Pillow",
-      "https://picsum.photos/200?random=1",
-      29.0,
-      "A soft pillow"
-    ),
-    new Product(
-      "A Bed",
-      "https://picsum.photos/200?random=2",
-      301.2,
-      "An outstanding bed"
-    ),
-  ];
+  #products = [];
 
   constructor(renderHookId) {
-    super(renderHookId);
+    super(renderHookId, false);
+    this.render();
+    this.fetchProducts();
+  }
+
+  fetchProducts() {
+    this.#products = [
+      new Product(
+        "A Pillow",
+        "https://picsum.photos/200?random=1",
+        29.0,
+        "A soft pillow"
+      ),
+      new Product(
+        "A Bed",
+        "https://picsum.photos/200?random=2",
+        301.2,
+        "An outstanding bed"
+      ),
+    ];
+    this.renderProducts();
+  }
+
+  renderProducts() {
+    /* render all products to be single product
+    this.products refers to the ProductList class
+    and then access to the products array */
+    for (const product of this.#products) {
+      new ProductItem(product, "prod-list");
+    }
   }
 
   render() {
     this.createRootElement("ul", "product-list", [
       new ElementAttribute("id", "prod-list"),
     ]);
-    /* render all products to be single product
-    this.products refers to the ProductList class
-    and then access to the products array */
-    for (const product of this.products) {
-      const productItem = new ProductItem(product, "prod-list");
-      productItem.render();
+    if (this.#products && this.#products.length > 0) {
+      this.renderProducts();
     }
   }
 }
 
 class Shop {
+  constructor() {
+    this.render();
+  }
+
   render() {
     this.cart = new ShoppingCart("app");
-    this.cart.render();
 
-    const productList = new ProductList("app");
-    productList.render();
+    new ProductList("app");
   }
 }
 
@@ -169,7 +210,6 @@ class App {
 
   static init() {
     const shop = new Shop();
-    shop.render();
     this.cart = shop.cart;
   }
 
