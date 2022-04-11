@@ -105,3 +105,33 @@ console.log(ownProps, prototypeProps);
     the result will be:
     [ type ]
 */
+
+/*
+    Behind the scene about Constructor() function.
+    See the code below:
+
+    class Person {
+      name = "Rhenaldo";
+
+      constructor() {
+        this.age = 23;
+      }
+
+      greet() {
+        console.log(`Hi my name is ${this.name} and I am ${this.age} years old)
+      }
+    }
+
+    code above behind the scenes will look like below:
+*/
+
+function Person() {
+  this.name = "Rhenaldo";
+  this.age = 23;
+  this.greet = function () {
+    console.log(`Hi my name is ${this.name} and I am ${this.age} years old.`);
+  };
+}
+
+const person = new Person();
+person.greet();
