@@ -109,23 +109,33 @@ console.log(ownProps, prototypeProps);
 /*
     Behind the scene about Constructor() function.
     See the code below:
-
-    class Person {
-      name = "Rhenaldo";
-
-      constructor() {
-        this.age = 23;
-      }
-
-      greet() {
-        console.log(`Hi my name is ${this.name} and I am ${this.age} years old)
-      }
-    }
-
-    code above behind the scenes will look like below:
 */
+class agedPerson {
+  printAge() {
+    console.log(this.age);
+  }
+}
 
-function Person() {
+class Person {
+  name = "Rhenaldo";
+
+  constructor() {
+    this.age = 23;
+  }
+
+  greet = () => {
+    console.log(`My name is ${this.name} and I am ${this.age} years old`);
+  };
+}
+
+const person = new Person();
+
+const greetButton = document.getElementById("btn");
+greetButton.addEventListener("click", person.greet);
+
+/* code above behind the scenes will look like below:
+
+  function Person() {
   this.name = "Rhenaldo";
   this.age = 23;
   this.greet = function () {
@@ -133,5 +143,11 @@ function Person() {
   };
 }
 
-const person = new Person();
-person.greet();
+Person.prototype = {
+  printAge() {
+    console.log(this.age);
+  },
+};
+
+
+ */

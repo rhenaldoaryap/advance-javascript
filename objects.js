@@ -93,10 +93,63 @@ console.log(student22.course);
   THIS KEYWORD WITH METHOD (FUNCTION INSIDE OF AN OBJECT)
 
   arrow function with "this" keyword will not bind to anything, it will always refererring
-  to the outside of the function (global windows)
+  to the outside of the function (global windows).
 
   very different with regular function, with regular function, this keyword will referring
-  and binding to the same object or to the same function we looking to
+  and binding to the same object or to the same function we looking to.
+
+  confusing?
+
+  see this code:
+  Arrow function and this keyword
+
+  class Person {
+    name = "Rhenaldo";
+
+    constructor() {
+      this.age = 23;
+    }
+
+    greet = () => {
+      console.log(`My name is ${this.name} and I am ${this.age} years old`)
+    }
+  }
+
+  const p = new Person();
+
+  const greetButton = document.getElementById("btn");
+  greetButton.addEventListener("click", p.greet)
+
+  output:
+  My name is Rhenaldo and I am 23 years old
+
+  ------
+  regular function with this keyword
+  class Person {
+    name = "Rhenaldo"
+
+    constructor() {
+      this.age = 23;
+    }
+
+    greet() {
+      console.log(`My name is ${this.name} and I am ${this.age} years old`)
+    }
+  }
+
+  const p = new Person();
+
+  const greetButton = document.getElementById("btn");
+  greetButton.addEventListener("click", p.greet.bind(p))
+
+  -----
+
+  Explanation:
+  with arrow function we can make sure the this keyword looking the same method or object
+  we looking to
+
+  but with regular function, we have to binding it when we call the method (shorthand method)
+  and binding it with the person variable we stored to.
 
   outside of the method, arrow function will shine and "this" keyword will referrring to
   the object or function we looking to.
