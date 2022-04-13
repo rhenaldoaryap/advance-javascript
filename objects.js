@@ -156,3 +156,16 @@ console.log(student22.course);
 
   OR FOR SIMPLY FOR DETERMINING THE THIS OBJECT IS LOOK BASED ON WHAT THE THIS KEYWORD IS CALLING
 */
+
+const course = {
+  title: "Javascript - The Complete Guide",
+  rating: 5,
+};
+
+Object.setPrototypeOf(course, {
+  printRating: function () {
+    console.log(`${this.rating}/5`);
+  },
+});
+
+course.printRating();
