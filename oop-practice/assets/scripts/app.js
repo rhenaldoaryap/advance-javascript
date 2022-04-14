@@ -13,28 +13,50 @@ class DOMHelper {
   }
 }
 
-class Tooltip {
-  constructor(closeNotifierFunction) {
-    this.closeNotifier = closeNotifierFunction;
+class Component {
+  constructor(hostElementId, insertBefore = false) {
+    if (hostElementId) {
+      this.hostElement = document.getElementById(hostElementId);
+    } else {
+      this.hostElement = document.body;
+    }
+
+    this.insertBefore = insertBefore;
   }
 
-  removeToolTip() {
+  detach() {
+    if (this.element) {
+      this.element.remove();
+    }
+  }
+
+  attach() {
+    this.hostElement.insertAdjacentElement(
+      this.insertBefore ? "beforebegin" : "beforeend",
+      this.element
+    );
+  }
+}
+
+class Tooltip extends Component {
+  constructor(closeNotifierFunction) {
+    super("active-projects");
+    this.closeNotifier = closeNotifierFunction;
+    this.create();
+  }
+
+  closeTooltip() {
     this.detach();
     this.closeNotifier();
   }
 
-  detach() {
-    this.element.remove();
-  }
-
-  attach() {
+  create() {
     const tooltipElement = document.createElement("div");
     tooltipElement.className = "card";
-    tooltipElement.addEventListener("click", this.removeToolTip.bind(this));
+    tooltipElement.textContent = "DUMMY!";
+    tooltipElement.addEventListener("click", this.closeTooltip.bind(this));
     // creating new variable with keyword this
     this.element = tooltipElement;
-    this.element.textContent = "DUMMY!";
-    document.body.append(tooltipElement);
   }
 }
 
