@@ -234,6 +234,32 @@ console.log(
 );
 
 /*
+    Another example of Pure Function
+
+    We passing the expected parameter inside of inner function
+    and calling it when we store it to a variable and then we give
+    the concrete argument for expected parameter, so we will not get
+    the side effect because not using pure function.
+
+    But not using pure function is also good, not wrong though.
+    Using pure function will help us to clearly tell the message about
+    what the function does and it will save many time and code to write then.
+*/
+
+function createCalculatorTax(tax) {
+  function calculateTax(amount) {
+    return amount * tax;
+  }
+  return calculateTax;
+}
+
+const calculateVatAmount = createCalculatorTax(0.19);
+const calculateIncomeTaxAmount = createCalculatorTax(0.25);
+
+console.log(calculateVatAmount(100)); // 19
+console.log(calculateIncomeTaxAmount(200)); // 50
+
+/*
   result:
   [
   'The Hound of the Baskervilles',
