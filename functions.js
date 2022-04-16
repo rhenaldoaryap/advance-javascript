@@ -246,9 +246,11 @@ console.log(
     what the function does and it will save many time and code to write then.
 */
 
+let multiplier = 1.1;
+
 function createCalculatorTax(tax) {
   function calculateTax(amount) {
-    return amount * tax;
+    return amount * tax * multiplier;
   }
   return calculateTax;
 }
@@ -256,8 +258,33 @@ function createCalculatorTax(tax) {
 const calculateVatAmount = createCalculatorTax(0.19);
 const calculateIncomeTaxAmount = createCalculatorTax(0.25);
 
+multiplier = 1.2;
+
 console.log(calculateVatAmount(100)); // 19
 console.log(calculateIncomeTaxAmount(200)); // 50
+
+/*
+  Closure
+
+  is a function having access to the parent scope, even after the parent scope has closed.
+
+  Explanation code above in topic of Closure.
+
+  We "tweak" a bit of code above, in order to get it what Closure is.
+  basically as the definition, Closure is a function having access to the parent scope,
+  even after the parent scope has closed or not exists after the parent scope was called.
+
+  in Javascript, ALL FUNCTIONS HAVE ACCESS TO THE SCOPE "ABOVE" THEM.
+  JavaScript support nested functions. Nested functions have access to the scope "above" them.
+  in example code above, we calling the multiplier variable (which is inside of nested function)
+  but the variable it self is outside of the function.
+
+  what we doing with the code above is we already use the JavaScript Closure
+  we were returning the inner function instead of calling it immediately (IIFE)
+  we only point to the inner function NOT EXECUTE IT. We only execute it when we call the outer function
+  and automatially the inner function also execute by magically provided by JavaScript
+
+*/
 
 /*
   result:
