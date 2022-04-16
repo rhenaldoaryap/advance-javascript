@@ -153,6 +153,135 @@ const recursive = (n) => {
 
 console.log(recursive(5));
 
+/*
+  Another example of recursion
+*/
+
+function powerOf(x, n) {
+  /*
+  if (n === 1) {
+    return x;
+  }
+  return x * powerOf(x, n - 1);
+
+    OR
+    using ternary operator
+  */
+  return n === 1 ? x : x * powerOf(x, n - 1);
+}
+
+console.log(powerOf(2, 3)); // 8
+
+/*
+  Explanation:
+
+  Here, we using recursive or calling the function it self
+
+  we passing the argument 2 and 3 as expected parameter and then
+  we pass the if check. If n (which is 3) is equal to 1 return the x (which is 2)
+  and it goes along way until meet the if check.
+
+  when it not meet the if check yet, the function always calling itself until meet the condition
+  first, our n is 3, and then mines 1 and it be 2, the function was finished and then execution the function again
+  until meet the condition
+  second, our n is 2, 2 mines 1 equal to 1. if 1 is meet the condition, which means the function will not
+  execute again and stop the execution.
+  in the end we only execute the function two (2) times, because we declared the exit condition (the if check)
+
+  so the calculate will be
+  2 * 2 -> for the first function execute
+  2 * 2 * 2 -> for the second function execute
+  and the end of result will be 8
+*/
+
+/*
+  Advance example of recursion
+
+  this will be very usefull when we fetching data from API
+  and that data is nested array inside of an object.
+  Because, an API is can be nested array inside of an object
+*/
+
+const mySelf = {
+  name: "Rhenaldo",
+  friends: [
+    {
+      name: "Gemoy",
+      friends: [
+        {
+          name: "Genti",
+          friends: [
+            {
+              name: "Esek",
+            },
+            {
+              name: "Gimiy",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: "Omo",
+    },
+    {
+      name: "Esek",
+    },
+  ],
+};
+
+function getFriendNames(person) {
+  // initial the empty array for storing data from nested array or API
+  const collectedNames = [];
+
+  /*
+  do the if check whether we get the data or not
+  if we not getting the data, return the empty array instead
+  why we access the friends property?
+  because we want to search who friends of Rhenaldo are
+  */
+  if (!person.friends) {
+    return [];
+  }
+
+  // person.friends just expected parameter and will be mySelf.friends after we pass the argument
+  for (const friend of person.friends) {
+    /*
+    since we get access to the nested array and this nested array will be mySelf.friends
+    and we loop it to get single data of it, we store it to the friend variable inside of loop,
+    and friend.name below, we access the data from mySelf since we have acces from the mySelf.friends
+    */
+    collectedNames.push(friend.name);
+    /*
+    and where the recursive then?
+    and why we using the recursive?
+    because recursive can be very helpful and give us many of advantages
+    like short of code which means we can save more code to write and save
+    more memory to store
+    below, we using the recursive (calling the function it self).
+
+    and why we spread the function (getFriendsName) then?
+    1. we want to get name of all the friends
+    2. we NOT want get the result of a nested array, we want to get the individual item inside
+       of nested array
+
+    remember, when you using spread operator, if spread operator is using inside of an object
+    it will taking out the key-value of the object and if spread operator is using inside of an array
+    it will taking out the value of the array
+    so why we using the spread operator?
+    simply we just want to get the individual data of the loop.
+    */
+    collectedNames.push(...getFriendNames(friend));
+  }
+  /*
+  after that don't forget to return the initial empty array to get the result of our function
+  when our function get execute.
+ */
+  return collectedNames;
+}
+
+console.log(getFriendNames(mySelf));
+
 // Recursive to create a range numbers
 const rangeNumbers = (startNum, endNum) => {
   return startNum === endNum
@@ -234,6 +363,29 @@ console.log(
 );
 
 /*
+  result:
+  [
+  'The Hound of the Baskervilles',
+  'On The Electrodynamics of Moving Bodies',
+  'Philosophiæ Naturalis Principia Mathematica',
+  'Disquisitiones Arithmeticae',
+  'A Brief History of Time'
+  ]
+  [
+    'The Hound of the Baskervilles',
+    'Philosophiæ Naturalis Principia Mathematica',
+    'Disquisitiones Arithmeticae'
+  ]
+  [
+    'The Hound of the Baskervilles',
+    'On The Electrodynamics of Moving Bodies',
+    'Philosophiæ Naturalis Principia Mathematica',
+    'Disquisitiones Arithmeticae',
+    'A Brief History of Time'
+  ]
+*/
+
+/*
     Another example of Pure Function
 
     We passing the expected parameter inside of inner function
@@ -246,19 +398,15 @@ console.log(
     what the function does and it will save many time and code to write then.
 */
 
-let multiplier = 1.1;
-
 function createCalculatorTax(tax) {
   function calculateTax(amount) {
-    return amount * tax * multiplier;
+    return amount * tax;
   }
   return calculateTax;
 }
 
 const calculateVatAmount = createCalculatorTax(0.19);
 const calculateIncomeTaxAmount = createCalculatorTax(0.25);
-
-multiplier = 1.2;
 
 console.log(calculateVatAmount(100)); // 19
 console.log(calculateIncomeTaxAmount(200)); // 50
@@ -285,29 +433,6 @@ console.log(calculateIncomeTaxAmount(200)); // 50
   and automatially the inner function also execute by magically provided by JavaScript
 
 */
-
-/*
-  result:
-  [
-  'The Hound of the Baskervilles',
-  'On The Electrodynamics of Moving Bodies',
-  'Philosophiæ Naturalis Principia Mathematica',
-  'Disquisitiones Arithmeticae',
-  'A Brief History of Time'
-  ]
-  [
-    'The Hound of the Baskervilles',
-    'Philosophiæ Naturalis Principia Mathematica',
-    'Disquisitiones Arithmeticae'
-  ]
-  [
-    'The Hound of the Baskervilles',
-    'On The Electrodynamics of Moving Bodies',
-    'Philosophiæ Naturalis Principia Mathematica',
-    'Disquisitiones Arithmeticae',
-    'A Brief History of Time'
-  ]
- */
 
 /*
   Dive deeper into map method to fetch data from JSON data
