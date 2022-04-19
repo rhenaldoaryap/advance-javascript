@@ -1,4 +1,7 @@
-class ProjectItem {
+import { DOMHelper } from "../Utility/DOMHelper.js";
+// import { Tooltip } from "./Tooltip.js";
+
+export class ProjectItem {
   hasActiveTooltip = false;
 
   constructor(id, updateProjectListFunction, type) {
@@ -15,15 +18,26 @@ class ProjectItem {
     }
     const projectElement = document.getElementById(this.id);
     const tooltipText = projectElement.dataset.extraInfo;
-    const tooltip = new Tooltip(
-      () => {
-        this.hasActiveTooltip = false;
-      },
-      tooltipText,
-      this.id
-    );
-    tooltip.attach();
-    this.hasActiveTooltip = true;
+    /*
+    using dynamic imports and code splitting
+    dynamic imports can be very helpful if we have a bunch of code
+    that not always needed to be downloaded, but still can be download
+    when user click this dynamic imports
+
+    using import keyword as a function and fill it with path of the file
+    and using THEN to handle as a promises.
+    */
+    import("./Tooltip.js").then((module) => {
+      const tooltip = new module.Tooltip(
+        () => {
+          this.hasActiveTooltip = false;
+        },
+        tooltipText,
+        this.id
+      );
+      tooltip.attach();
+      this.hasActiveTooltip = true;
+    });
   }
 
   // learn drag items
