@@ -22,9 +22,39 @@ const company = {
     this.curEmployee++;
     return returnValue;
   },
+  /*
+    generators
+
+    basically generators will build up for us an iterators object
+    instead of creating it manually, we can use the generators to create
+    such an iterators object we can use later.
+    below is the generators code
+  */
+  [Symbol.iterator]: function* employeeGenerator() {
+    /*
+      let employee = company.next();
+
+      while (!employee.done) {
+          yield employee.value;
+          employee = company.next();
+      }
+      */
+    let currentEmployee = 0;
+    while (currentEmployee < this.employess.length) {
+      yield this.employess[currentEmployee];
+      currentEmployee++;
+    }
+  },
+  /*
+    explanation:
+
+    what the code does is create A NEW OBJECT when this function is called
+    which has next() method on its own
+
+    yield keyword is same like return keyword
+  */
 };
 
-console.log(company.next());
-console.log(company.next());
-console.log(company.next());
-console.log(company.next());
+for (const employee of company) {
+  console.log(employee);
+}
