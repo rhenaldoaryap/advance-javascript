@@ -22,9 +22,14 @@ export class Modal {
 
       /*
         modal
+
+        change from const -> this
+        const modalElement -> this.modalElement
+        const backdropElement -> this.backdropElement
+        the reason is to make the variable is available to be use to another method.
       */
-      const modalElement = modalElements.querySelector(".modal");
-      const backdropElement = modalElements.querySelector(".backdrop");
+      this.modalElement = modalElements.querySelector(".modal");
+      this.backdropElement = modalElements.querySelector(".backdrop");
 
       /*
         actual content we want to display
@@ -36,15 +41,26 @@ export class Modal {
 
       /*
         added to the page
+        change with using this keyword to be avaibale on entire class
       */
-      modalElement.appendChild(contentElement);
+      this.modalElement.appendChild(contentElement);
 
-      document.body.insertAdjacentElement("afterbegin", modalElement);
-      document.body.insertAdjacentElement("afterbegin", backdropElement);
+      document.body.insertAdjacentElement("afterbegin", this.modalElement);
+      document.body.insertAdjacentElement("afterbegin", this.backdropElement);
     } else {
       alert(this.fallbackText);
     }
   }
 
-  hide() {}
+  hide() {
+    if (this.modalElement) {
+      document.body.removeChild(this.modalElement);
+      document.body.removeChild(this.backdropElement);
+      /*
+        clearing from the DOM
+      */
+      this.modalElement = null;
+      this.backdropElement = null;
+    }
+  }
 }
