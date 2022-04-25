@@ -28,3 +28,64 @@ a();
     get called, the first too that function taking out of the stack. And we use the reference to the outer lexical
     environment, outer lexical environment is the reason why we can override myVar value
 */
+
+/*
+    coercion
+*/
+let coercion = "10" + 2;
+console.log(coercion);
+/*
+    explanation:
+
+    + -> coercion to be a string
+    let coercion = "10" + 2 // "102"
+
+    Why this can be 102 string?
+    because JavaScript engine will look the data type and it will coercion
+    the add function to be a string, and JavaScript will guest as best as it can to define
+    what the code that developer want to save to the variable instead of throwing an error.
+    And again, JavaScript will convert it to be a string
+
+    - -> coercion to be an integer
+    let coercion = "10" - 2 // 8
+
+    / -> coercion to be an integer
+    let coercion = "10" / 2 // 5
+
+    % -> coercion to be an integer
+    let coercion = "10" % 2 // 0
+
+    * -> coercion to be an integer
+    let coercion = "10" * 2 // 20
+*/
+
+/*
+    comparison operator
+*/
+
+console.log(3 < 2 < 1); // true
+
+/*
+    explanation:
+
+    how the f that can be true?
+    3 < 2 < 1 would be false, obviously
+    because 3 is not less than 2, and 2 is not less than 1
+
+    but why that yield true?
+    remember the precedence and associativity
+    when the precedence is same level, associativy come into play
+
+    what actually happens is
+    when associativity come, JavaScript will count the first operator function
+    that would be -> console.log(false < 1)
+
+    and then JavaScript engine will try to coercion the boolean to a number.
+    In JavaScript, falsy will return 0 and truthy will return 1.
+    That means, the next calculation is -> console.log(0 < 1) and of course, this will yield true.
+
+    To make sure and make more understand about what actually happens is, you can use the dev-tools
+    and using Number variable on it.
+    Number(false) -> 0
+    Number(true) -> 1
+*/
