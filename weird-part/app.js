@@ -181,3 +181,69 @@ greetPersonObjectLiterals({
   firstname: "Arya",
   lastname: "Robert",
 }); // "Hi Arya"
+
+/*
+    not just that, we can create a new variable inside of a function.
+    How we can do that?
+    because in JavaScript, function is object
+    JavaScript contain the First Class Function, that means we can add another type of data to a function.
+
+
+    Function is a special type of object.
+*/
+
+// take function from line 97
+greet.language = "english";
+console.log(greet.language); // english
+
+/*
+    Function Statements and Function Expressions
+
+    You can easily remember the function expressions is whatever it is after the equal sign
+    or function expressions it is return a value.
+
+    function statements is the opposite of the function expressions.
+    function statements just sitting here all by it self. The example of function statement is
+    if () statement, that is one of the example.
+
+    When using function statements or function expressions, remember about
+    JavaScript is First Class Function.
+    That means we can pass any type of data to a function, either that is a numbers, boolean, string
+    whatever it is.
+
+    So see the code:
+*/
+// function statement
+anotherGreet();
+
+function anotherGreet() {
+  console.log("Hi"); // return -> Hi
+}
+
+// function expressions
+// anonymousGreet();
+
+let anonymousGreet = function () {
+  console.log("Hi"); // return -> undefined is not a function
+};
+
+anonymousGreet();
+
+/*
+    How that can be an undefined is not a function?
+    because the expression function is not Hoisted.
+    Why that expression function is not hoisted?
+
+    Remember about the creation phase and execution phase,
+    what does it set the variable equal to before it starts execution the code?
+    Yup, undefined.
+    When we calling the function expressions before we initialized a value to that function,
+    JavaScript will translate it to undefined first, so the code of function expression will end up like:
+
+    let undefined = function() {
+        console.log("Hi")
+    }
+
+    So, how to make it work?
+    We should call the function expression after we initialized the value, not before it.
+*/
