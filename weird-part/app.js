@@ -89,3 +89,95 @@ console.log(3 < 2 < 1); // true
     Number(false) -> 0
     Number(true) -> 1
 */
+
+/*
+    giving default value with legacy code before ES6
+*/
+
+function greet(name) {
+  name = name || "<Your name here>";
+  console.log("Hello " + name);
+}
+
+greet(); // Hello <Your name here>
+
+/*
+    explanation:
+
+    Always remember about precedence and associtivy
+    an operator (+, -, /, *, &&, ||) basically just a function and return a value
+    for JavaScript, operator will look like this
+    function +() {}
+    function -() {}
+    function /() {}
+    and so on..
+
+    || (OR) operator has a special behavior, that operator always return a true value
+    for example:
+    0 || "Hello" -> "Hello"
+    "Hello" || undefined -> "Hello"
+    "" || "Hello" -> "Hello"
+
+    || (OR) operator always return true value if one of the value returning a true
+    how if we giving the true value for both values?
+    "Hi" || "World" -> "Hi"
+    it will return the first true value
+
+    because on the precedence and associtivy, = (equal) is higher precedence than || (OR) operator
+    and that means the || will evaluate first and then equal will be evaluate after it.
+    It runs left-to-right, so that make sense if the || (OR) operator will return the first true value
+    if there are two true values in it.
+*/
+
+/*
+    Object and functions
+*/
+
+/*
+    creating an object with shorthand new Object()
+    not recommend to create such an object like this
+    because it is hard to read and hard to maintenance
+*/
+
+let person = new Object();
+
+person["firstname"] = "Rhenaldo";
+person["lastname"] = "Pangestu";
+
+let firstnameProperty = "firstname";
+console.log(person);
+console.log(person.firstname); // dot or member accesss operator
+console.log(person[firstnameProperty]); // computed member access operator
+console.log(person["firstname"]); //
+
+/*
+    creating an object with object literals
+    creating an object with this way is recommend because it is more readable
+    and more faster and stronger than using the shorthand syntax
+*/
+
+let personObjectLiterals = {
+  firstname: "Rhenaldo",
+  lastname: "Pangestu",
+  address: {
+    street: "Pluto VIII",
+    city: "Bekasi",
+    state: "Jawa Barat",
+  },
+};
+
+function greetPersonObjectLiterals(person) {
+  console.log("Hi " + person.firstname);
+}
+
+greetPersonObjectLiterals(personObjectLiterals); // "Hi Rhenaldo"
+
+/*
+    we can also create an object anywhere we want, for example
+    when we calling our function and create an object on the fly (to do something quickly)
+*/
+
+greetPersonObjectLiterals({
+  firstname: "Arya",
+  lastname: "Robert",
+}); // "Hi Arya"
