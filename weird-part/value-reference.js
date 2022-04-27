@@ -103,3 +103,20 @@ let cd = {
 };
 
 cd.log();
+
+let arr = [
+  1,
+  false,
+  {
+    name: "Rhenaldo",
+    address: "Pluto VIII",
+  },
+  function (name) {
+    let greeting = "Hello ";
+    console.log(greeting + name); // Hello Rhenaldo
+  },
+  "Hello",
+];
+
+console.log(arr); // return all inside of the array
+arr[3](arr[2].name); // we execute function and then access the object and access the name property inside of it.
