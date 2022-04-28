@@ -89,6 +89,7 @@ logPersonName();
 /*
     When we using the call - apply - bind method in real life?
     Let's see an instance below:
+    the code above is called FUNCTION BORROWING
 */
 
 let person2 = {
@@ -108,4 +109,79 @@ console.log(person.getFullname.apply(person2));
     we applied to.
 
     so the this keyword inside of the getFullname method will be ${person2.firstname} ${person2.lastname}
+
+    this can only be happpens as long as we have similiar property names between of two objects we used to.
+*/
+
+/*
+    function currying
+
+    function currying can be using when we use the bind method,
+    when we passing a parameter to bind method, we will see some interest thing
+    see the code below:
+*/
+function multiple(a, b) {
+  return a * b;
+}
+
+const multipleByTwo = multiple.bind(this, 2);
+console.log(multipleByTwo(4));
+/*
+    result:
+    8
+
+    explanation:
+    when we use the bind method to a function and we pass the argument to it
+    we don't care about what the this keyword contain because we are not use the 'this' reference
+    inside of the function we binding at.
+
+    Bind method can accept two arguments, first one the function we want to binding at and the second one is
+    the argument we want pass to as much as we want
+    If we do like line 127, that means the two (second argument) will permanently fill in the first parameter
+
+    so under the hood, the code will be look like this:
+
+    function multipleByTwo(b) {
+        let a = 2;
+        return a * b
+    }
+
+    const multipleByTwo = multiple.bind(this, 2)
+
+    that means, our code (not code under the hood) will be like this:
+
+    function multiple(2, b) {
+        return 2 * b
+    }
+
+    const multipleByTwo = multiple.bind(this, 2)
+    multipleByTwo(4)
+
+    ===========================
+    So, when we call the function by the store variable -> multipleByTwo(4)
+    the argument inside of that variable will fill in the second argument
+    and will end up 4 * 2 and the result will be 8
+
+    How if we pass the third argument (still counted as second parameter because bind method will spread it)?
+    function multiple(a, b) {
+        return a * b
+    }
+
+    const multipleByTwo = multiple.bind(this, 2, 3)
+    multipleByTwo(4)
+
+    bind method will permanently pass the a = 2, b = 3
+    and end up to be 6
+
+    So what the parameter doing at the multipleByTwo?
+    that will be an extra parameter if we not pass the second parameter when we binding it.
+
+    How if we pass no parameters to bind method?
+    the multipleByTwo will play in action
+    function multiple(a, b) {
+        return a * b
+    }
+
+    const multipleByTwo = multiple.bind(this)
+    multipleByTwo(5, 2) -> 10
 */
