@@ -38,3 +38,23 @@ greetVariable("Rhenaldo"); // Hi Rhenaldo
     the variables that is supposed to have access to.
     That it is scope is intact (utuh)
 */
+
+function makeGreetings(language) {
+  return function (firstname, lastname) {
+    if (language === "en") {
+      console.log(`Hello, ${firstname} ${lastname}`);
+    } else if (language === "es") {
+      console.log(`Hola, ${firstname} ${lastname}`);
+    } else {
+      console.log(`This is not from English or Spanyol`);
+    }
+  };
+}
+
+const greetEnglish = makeGreetings("en");
+const greetSpanish = makeGreetings("es");
+const greetBekasi = makeGreetings("eas");
+
+greetEnglish("Rhenaldo", "Arya");
+greetSpanish("Rhenaldo", "Arya");
+greetBekasi("Rhenaldo", "Arya");
