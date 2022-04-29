@@ -64,12 +64,25 @@ setTimeout(() => {
 */
 const doWork = (resolve, reject) => {
   setTimeout(() => {
-    resolve("Hello World");
+    resolve("Hello");
   }, 1000);
 };
 
-let someText = new Promise(doWork);
+const doOtherWork = (resolve, reject) => {
+  setTimeout(() => {
+    resolve("Hello Again");
+  }, 1000);
+};
 
-someText.then((val) => {
-  console.log(`1st log ${val}`);
-});
+const doAllWork = async (resolve, reject) => {
+  const someText = new Promise(doWork);
+  const text1 = await someText;
+  console.log(text1);
+
+  const otherText = new Promise(doOtherWork);
+  const text2 = await otherText;
+  console.log(text2);
+};
+
+doAllWork();
+console.log("Done, this will print first because of global execution context");
